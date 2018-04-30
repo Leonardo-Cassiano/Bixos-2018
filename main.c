@@ -1,9 +1,10 @@
 #include <avr/io.h>
-#include <util/delay.h>
 #include <avr/interrupt.h>
-#include "utils.h"
-#include "sensors.h"
+#include <util/delay.h>
+#include "hardware.h"
 #include "motors.h"
+#include "sensors.h"
+#include "utils.h"
 #include "timer.h"
 
 #define v0Esquerda   100
