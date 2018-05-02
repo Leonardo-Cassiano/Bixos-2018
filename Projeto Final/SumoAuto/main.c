@@ -6,8 +6,9 @@
 #include "motors.h"
 #include "timer.h"
 
-#define velocidadeEsq 100 
+#define velocidadeEsq 100
 #define velocidadeDir -100
+#define limite 500
 
 int main () {
     int diferenca;
@@ -19,18 +20,18 @@ int main () {
         update_line_sensors();
         update_distance_sensors();
         diferenca = distance_sensors[0] - distance_sensors[1];
-        motors (velocidadeEsq + diferenca , velocidadeDir + diferenca);
-        if(line_sensors[0] < line_sensors[1]){
-            motors(velocicadeEsq + diferenca , 0 );  //depois de usar a diferenca entre valores comparado a um threshold
+        motors (velocidadeEsq - diferenca , velocidadeDir + diferenca);
+        if(limite < line_sensors[0]){
+            motors(velocicadeEsq - diferenca , 0 );  //depois de usar a diferenca entre valores comparado a um threshold
             _delay_ms(500);
 
         }
-        else if(line_sensors[0] > line_sensors[1]){
+        else if(limite < line_sensors[1]){
             motors(0 , velocidadeDir + diferenca);
             _delay_ms(500);
         }
-        else if(line_sensors[0] > 1 && line_sensors[1] > 1){
-            motors(-(velocidadeEsq + diferenca) , -(velocidadeDir + diferenca));
+        else if(line_sensors[0] > limite && line_sensors[1] > limite){
+            motors(-(velocidadeEsq - diferenca) , -(velocidadeDir + diferenca));
             _delay_ms(500);
         }
 

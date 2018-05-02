@@ -7,8 +7,8 @@
 #include "utils.h"
 #include "timer.h"
 
-#define v0Esquerda   100
-#define v0Direita 	-100
+#define v0Esquerda   255
+#define v0Direita 	-255
 
 // 0 1 2 3 4 5 6
 
@@ -23,22 +23,22 @@ int main(void) {
 		diferenca = (sensors[6]+sensors[5]+sensors[4])-(sensors[0]+sensors[1]+sensors[2]);
 
 		if (v0Esquerda + diferenca > 255) {
-			vEsquerda = 255
+			vEsquerda = 285
 		}
 		else if (v0Esquerda + diferenca < -255) {
-			vEsquerda = -255
+			vEsquerda = -285
 		}
 		else {
 			vEsquerda = v0Esquerda + diferenca
 		}
-		if (v0Direita + diferenca > 255) {
-			vDireita = 255
+		if (v0Direita - diferenca > 255) {
+			vDireita = 285
 		}
-		else if (v0Direita + diferenca < -255) {
-			vDireita = -255
+		else if (v0Direita - diferenca < -255) {
+			vDireita = -285
 		}
 		else {
-			vDireita = v0Direita + diferenca
+			vDireita = v0Direita - diferenca
 		}
 
 		set_motors(vEsquerda,vDireita)
@@ -47,5 +47,5 @@ int main(void) {
 	}
 	return 0;
 }
-// 
+//
 
