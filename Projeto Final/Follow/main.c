@@ -7,10 +7,10 @@
 #include "utils.h"
 #include "timer.h"
 
-#define v0Esquerda   150
-#define v0Direita 	 150
-#define limite       20
-#define incremento   30
+#define v0Esquerda   50
+#define v0Direita 	 50
+#define limite       100
+#define incremento   20
 
 // 0 1 2 3 4 5 6
 

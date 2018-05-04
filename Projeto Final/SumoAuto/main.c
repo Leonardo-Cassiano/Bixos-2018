@@ -6,10 +6,10 @@
 #include "motors.h"
 #include "timer.h"
 
-#define velocidadeEsq 150
-#define velocidadeDir 150
-#define limite 500
-#define incremento 50
+#define velocidadeEsq 90
+#define velocidadeDir 90
+#define limite 200
+#define incremento 30
 
 int main () {
     int diferenca;
@@ -25,14 +25,14 @@ int main () {
 
         // controle com seguidor de linha
 
-        if(line_sensors[0] > limite && line_sensors[1] > limite){ // encontrou a linha de frente
+        if(line_sensors[0] < limite && line_sensors[1] < limite){ // encontrou a linha de frente
             motors(-(velocidadeEsq + incremento) , -(velocidadeDir + incremento));
             _delay_ms(100);
             motors(-(velocidadeEsq + incremento), velocidadeDir + incremento);
             _delay_ms(100);
         }
         else if(limite > line_sensors[0]){ // encontrou a linha a esquerda
-            motors(velocidadeEsq + incremento , 0 );
+            motors(velocidadeEsq + incremento ,0 );
             _delay_ms(200);
         }
         else if(limite > line_sensors[1]){ // encontrou a linha a direita
