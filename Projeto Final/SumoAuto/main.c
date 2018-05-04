@@ -6,9 +6,10 @@
 #include "motors.h"
 #include "timer.h"
 
-#define velocidadeEsq 100
-#define velocidadeDir -100
+#define velocidadeEsq 150
+#define velocidadeDir 150
 #define limite 500
+#define incremento 50
 
 int main () {
     int diferenca;
@@ -16,23 +17,50 @@ int main () {
     timer_init();
     sensors_init();
     _delay_ms(5000);
+    motors (velocidadeEsq, velocidadeDir);
     for (;;) {
         update_line_sensors();
         update_distance_sensors();
-        diferenca = distance_sensors[0] - distance_sensors[1];
-        motors (velocidadeEsq - diferenca , velocidadeDir + diferenca);
-        if(limite < line_sensors[0]){
-            motors(velocicadeEsq - diferenca , 0 );  //depois de usar a diferenca entre valores comparado a um threshold
-            _delay_ms(500);
 
+
+        // controle com seguidor de linha
+
+        if(line_sensors[0] > limite && line_sensors[1] > limite){ // encontrou a linha de frente
+            motors(-(velocidadeEsq + incremento) , -(velocidadeDir + incremento));
+            _delay_ms(100);
+            motors(-(velocidadeEsq + incremento), velocidadeDir + incremento);
+            _delay_ms(100);
         }
-        else if(limite < line_sensors[1]){
-            motors(0 , velocidadeDir + diferenca);
-            _delay_ms(500);
+        else if(limite > line_sensors[0]){ // encontrou a linha a esquerda
+            motors(velocicadeEsq + incremento , 0 );
+            _delay_ms(200);
         }
-        else if(line_sensors[0] > limite && line_sensors[1] > limite){
-            motors(-(velocidadeEsq - diferenca) , -(velocidadeDir + diferenca));
-            _delay_ms(500);
+        else if(limite > line_sensors[1]){ // encontrou a linha a direita
+            motors(0 , velocidadeDir + incremento);
+            _delay_ms(200);
+        }
+
+        else {
+            diferenca = distance_sensors[0] - distance_sensors[1];
+
+            // controle com sensor de distancia
+
+            if (abs(diferenca) > limite){
+                if (diferenca > 0){
+                    motors(velocidadeEsq, velocidadeDir + incremento);
+                }
+                else if (diferenca < 0){
+                    motors(velocidadeEsq + incremento, velocidadeDir):
+                }
+            }
+            else{
+                motor(velocidadeEsq + incremento, velocidadeDir + incremento);
+            }
+
+
+
+
+
         }
 
     }
