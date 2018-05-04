@@ -11,7 +11,7 @@ main.elf: hardware.o main.o motors.o sensors.o timer.o utils.o
 	avr-gcc -o main.elf hardware.o main.o motors.o sensors.o timer.o utils.o -mmcu=atmega88 -std=c99 -Wall -Wextra -Os
 
 .c.o:
-	avr-gcc -c $< -o $@
+	avr-gcc -DF_CPU=8000000 -c $< -o $@
 
 flash load:
 	avrdude -c usbasp -p $(IDMC) -U flash:w:main.hex:i
