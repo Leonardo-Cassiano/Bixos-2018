@@ -23,7 +23,7 @@ int main(void) {
     vEsquerda = v0Esquerda;
     set_motors(v0Esquerda,v0Direita);
 	for (;;) {
-		sensor_update();
+		sensors_update();
 
 		diferenca = (sensors[6]+sensors[5]+sensors[4])-(sensors[0]+sensors[1]+sensors[2]);
 

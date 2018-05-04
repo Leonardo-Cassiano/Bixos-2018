@@ -32,7 +32,7 @@ int main () {
             _delay_ms(100);
         }
         else if(limite > line_sensors[0]){ // encontrou a linha a esquerda
-            motors(velocicadeEsq + incremento , 0 );
+            motors(velocidadeEsq + incremento , 0 );
             _delay_ms(200);
         }
         else if(limite > line_sensors[1]){ // encontrou a linha a direita
@@ -50,11 +50,11 @@ int main () {
                     motors(velocidadeEsq, velocidadeDir + incremento);
                 }
                 else if (diferenca < 0){
-                    motors(velocidadeEsq + incremento, velocidadeDir):
+                    motors(velocidadeEsq + incremento, velocidadeDir);
                 }
             }
             else{
-                motor(velocidadeEsq + incremento, velocidadeDir + incremento);
+                motors(velocidadeEsq + incremento, velocidadeDir + incremento);
             }
 
 
