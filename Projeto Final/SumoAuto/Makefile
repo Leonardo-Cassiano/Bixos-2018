@@ -18,6 +18,3 @@ flash load:
 
 clean:
 	rm -f *.o main.hex main.elf
-
-
-#  $ avr-gcc -c arquivo.c -o arquivo.o -mmcu=id_microcontrolador -std=c99 -Wall -Wextra -Os
