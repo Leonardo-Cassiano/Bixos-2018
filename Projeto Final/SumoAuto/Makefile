@@ -7,8 +7,8 @@ all: main.hex
 main.hex: main.elf
 	avr-objcopy -j .text -j .data -O ihex main.elf main.hex
 
-main.elf: main.o motors.o sensors.o timer.o utils.o
-	avr-gcc -o main.elf main.o motors.o sensors.o timer.o utils.o -mmcu=$(IDMC) -std=c99 -Wall -Wextra -Os
+main.elf: main.o motors.o sensors.o timer.o utils.o usart.o
+	avr-gcc -o main.elf main.o motors.o sensors.o timer.o utils.o usart.o -mmcu=$(IDMC) -std=c99 -Wall -Wextra -Os
 
 .c.o:
 	avr-gcc -DF_CPU=8000000 -c $< -o $@ -mmcu=atmega328p -std=c99 -Wall -Wextra -Os
