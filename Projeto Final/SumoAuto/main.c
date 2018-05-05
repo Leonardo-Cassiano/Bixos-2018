@@ -5,10 +5,13 @@
 #include "sensors.h"
 #include "motors.h"
 #include "timer.h"
+#include "usart.h"
+
 
 #define velocidadeEsq 90
 #define velocidadeDir 90
 #define limite 200
+#define visao 1000
 #define incremento 30
 
 int main () {
@@ -45,7 +48,7 @@ int main () {
 
             // controle com sensor de distancia
 
-            if (abs(diferenca) > limite){
+            if (abs(diferenca) > visao){
                 if (diferenca > 0){
                     motors(velocidadeEsq, velocidadeDir + incremento);
                 }
@@ -56,7 +59,7 @@ int main () {
             else{
                 motors(velocidadeEsq + incremento, velocidadeDir + incremento);
             }
-
+        _delay_ms(20);
 
 
 
